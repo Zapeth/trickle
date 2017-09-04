@@ -332,7 +332,7 @@ socket(int domain, int type, int protocol)
 	type &= ~SOCK_CLOEXEC;
 #endif
 
-	if (sock != -1 && domain == AF_INET && type == SOCK_STREAM) {
+	if (sock != -1 && domain == AF_INET && type & SOCK_STREAM) {
 		if ((sd = calloc(1, sizeof(*sd))) == NULL)
 			return (-1);
 		trickle_lock();
