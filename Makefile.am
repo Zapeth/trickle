@@ -31,10 +31,15 @@ tricklectl_LDADD = @ERRO@ $(LIBOBJS)
 AM_CFLAGS = -Wall -Icompat @EVENTINC@
 
 overloaddir = $(libdir)
-overload_DATA = libtrickle.so
 
-libtrickle.so: trickle-overload.c atomicio.c
-$(overload_DATA):
+
+libtrickle.so: trickle-overload.lo atomicio.lo
+	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o libtmp$@.la
+		-rpath $(libdir)/trickle trickle-overload.lo atomicio.lo $(LIBS)
+		$(LDFLAGS) -module -avoid-version -nostdlib -ldl
+	@rm -f libtmp$@.la tmp$@.so* $@
+	@cp .libs/libtmp$@.so $@
+	@rm -f .libs/libtmp$@.*
 
 CLEANFILES = *.so
 
