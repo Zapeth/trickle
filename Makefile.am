@@ -34,8 +34,8 @@ overloaddir = $(libdir)
 
 
 libtrickle.so: trickle-overload.lo atomicio.lo
-	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o libtmp$@.la
-		-rpath $(libdir)/trickle trickle-overload.lo atomicio.lo $(LIBS)
+	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o libtmp$@.la \
+		-rpath $(libdir)/trickle trickle-overload.lo atomicio.lo $(LIBS) \
 		$(LDFLAGS) -module -avoid-version -nostdlib -ldl
 	@rm -f libtmp$@.la tmp$@.so* $@
 	@cp .libs/libtmp$@.so $@
