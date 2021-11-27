@@ -134,6 +134,9 @@ then
 AC_SUBST(EVENTINC)
 AC_SUBST(EVENTLIB)
 
+dnl Checks for libtirpc
+PKG_CHECK_MODULES(TIRPC, libtirpc)
+
 dnl check if underscores are needed
 AC_MSG_CHECKING(if underscores are needed for symbols)
 AC_TRY_RUN(

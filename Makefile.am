@@ -11,7 +11,7 @@ trickle-overload.so: $(TRICKLEOVERLOADFILES)
 	@rm -f .libs/libtmp$@.*
 
 trickleoverloaddir = $(libdir)/trickle
-trickleoverload_DATA = trickle-overload.so
+trickleoverload_DATA = trickle-overload.so libtrickle.so
 
 man_MANS = trickle.1 trickled.8 trickled.conf.5
 
@@ -23,12 +23,12 @@ trickle_LDADD = @ERRO@ $(LIBOBJS)
 
 trickled_SOURCES = trickled.c atomicio.c print.c bwstat.c client.c conf.c \
                    util.c cleanup.c getopt.c xdr.c
-trickled_LDADD = @EVENTLIB@ $(LIBOBJS)
+trickled_LDADD = @EVENTLIB@ @TIRPC_LIBS@ $(LIBOBJS)
 
 tricklectl_SOURCES = tricklectl.c trickledu.c atomicio.c xdr.c
-tricklectl_LDADD = @ERRO@ $(LIBOBJS)
+tricklectl_LDADD = @ERRO@ @TIRPC_LIBS@ $(LIBOBJS)
 
-AM_CFLAGS = -Wall -Icompat @EVENTINC@
+AM_CFLAGS = -Wall -Icompat @EVENTINC@ @TIRPC_CFLAGS@
 
 overloaddir = $(libdir)
 
