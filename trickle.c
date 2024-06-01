@@ -72,7 +72,7 @@ main(int argc, char **argv)
 			downlim = optarg;
 			break;
 		case 'V':
-			errx(1, "version " VERSION);
+			errx(0, "version " VERSION);
 			break;
 		case 'n':
 			strlcpy(sockname, optarg, sizeof(sockname));
